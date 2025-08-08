@@ -10,24 +10,38 @@ function createDownloadButton(targetElement) {
     const button = document.createElement('button');
     button.textContent = '⬇️';
     // Apply styles for the button
+    // Apply styles for the button
     Object.assign(button.style, {
         position: 'absolute',
-        top: '15px', // Adjusted for better visibility on various players
+        top: '15px',
         left: '15px',
-        zIndex: MAX_Z_INDEX, // Use the max z-index
-        backgroundColor: 'rgba(0, 0, 0, 0.7)', // More neutral color
+        zIndex: '2147483647',
+        backgroundColor: 'rgba(0, 0, 0, 0.7)',
         color: 'white',
-        border: '2px solid white', // Add border for better visibility
+        border: '2px solid white',
         borderRadius: '50%',
-        width: '40px', // Slightly larger
+        width: '40px',
         height: '40px',
         fontSize: '20px',
         cursor: 'pointer',
-        opacity: '0.6',
+        opacity: '0', // Initially hidden
+        pointerEvents: 'none', // Initially not clickable
+        transition: 'opacity 0.2s ease-in-out', // Smooth transition
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        boxShadow: '0 2px 5px rgba(0,0,0,0.5)' // Add shadow
+        boxShadow: '0 2px 5px rgba(0,0,0,0.5)'
+    });
+
+    // Show the button when the mouse is over the container, hide it when it leaves
+    targetElement.addEventListener('mouseenter', () => {
+        button.style.opacity = '0.8';
+        button.style.pointerEvents = 'auto';
+    });
+
+    targetElement.addEventListener('mouseleave', () => {
+        button.style.opacity = '0';
+        button.style.pointerEvents = 'none';
     });
 
     button.addEventListener('mouseover', () => button.style.opacity = '1');
